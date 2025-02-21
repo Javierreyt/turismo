@@ -20,7 +20,7 @@ public class POI {
      * Identificador único del POI.
      */
     @Id
-    private String id;
+    private String _id;
 
     /**
      * Nombre del POI.

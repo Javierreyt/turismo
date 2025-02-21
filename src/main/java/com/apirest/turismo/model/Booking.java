@@ -23,7 +23,7 @@ public class Booking {
      * Identificador único de la reserva.
      */
     @Id
-    private String id;
+    private String _id;
 
     /**
      * Nombre del huésped.

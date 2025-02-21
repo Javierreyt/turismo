@@ -21,7 +21,7 @@ public class Hotel {
      * Identificador único del hotel.
      */
     @Id
-    private String id;
+    private String _id;
 
     /**
      * Nombre del hotel.

@@ -21,7 +21,7 @@ public class Review {
      * Identificador único de la reseña.
      */
     @Id
-    private String id;
+    private String _id;
 
     /**
      * Autor de la reseña.
