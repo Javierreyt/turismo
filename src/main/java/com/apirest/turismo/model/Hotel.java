@@ -15,7 +15,7 @@ import org.springframework.data.annotation.Id;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(collection = "hoteles")
+@Document(collection = "hotel")
 public class Hotel {
     /**
      * Identificador único del hotel.
