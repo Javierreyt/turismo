@@ -10,6 +10,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
+/**
+ * Controlador REST para gestionar las reservas (\Booking\).
+ * <p>
+ * Proporciona endpoints para crear y gestionar reservas en hoteles.
+ * </p>
+ */
 @RestController
 @RequestMapping("/bookings")
 public class BookingController {
@@ -20,7 +26,12 @@ public class BookingController {
     @Autowired
     private HotelRepository hotelRepository;
 
-    // POST /bookings - Crear una booking en un hotel (protegido)
+    /**
+     * Crea una nueva reserva en un hotel.
+     *
+     * @param booking la información de la reserva a crear
+     * @return ResponseEntity con la reserva creada o un mensaje de error
+     */
     @PostMapping
     public ResponseEntity<?> createBooking(@RequestBody Booking booking) {
         if (booking.getHotelId() == null || booking.getHotelId().isEmpty()) {

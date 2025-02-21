@@ -9,6 +9,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Controlador REST para gestionar las reseñas.
+ * <p>
+ * Proporciona endpoints para crear, actualizar, listar y obtener detalles de reseñas.
+ * </p>
+ */
 @RestController
 @RequestMapping("/reviews")
 public class ReviewController {
@@ -16,13 +22,22 @@ public class ReviewController {
     @Autowired
     private ReviewRepository reviewRepository;
 
-    // GET /reviews - Listar todas las reseñas
+    /**
+     * Listar todas las reseñas.
+     *
+     * @return Lista de todas las reseñas
+     */
     @GetMapping
     public List<Review> getAllReviews() {
         return reviewRepository.findAll();
     }
 
-    // GET /reviews/{id} - Obtener detalles de una reseña por ID
+    /**
+     * Obtener detalles de una reseña por ID.
+     *
+     * @param id Identificador de la reseña
+     * @return ResponseEntity con los detalles de la reseña o un mensaje de error
+     */
     @GetMapping("/{id}")
     public ResponseEntity<Review> getReviewById(@PathVariable String id) {
         Optional<Review> review = reviewRepository.findById(id);
@@ -30,14 +45,25 @@ public class ReviewController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    // POST /reviews - Crear una nueva reseña (protegido)
+    /**
+     * Crear una nueva reseña.
+     *
+     * @param review Información de la reseña a crear
+     * @return ResponseEntity con la reseña creada
+     */
     @PostMapping
     public ResponseEntity<Review> createReview(@RequestBody Review review) {
         Review savedReview = reviewRepository.save(review);
         return ResponseEntity.ok(savedReview);
     }
 
-    // PUT /reviews/{id} - Actualizar una reseña existente (protegido)
+    /**
+     * Actualizar una reseña existente.
+     *
+     * @param id Identificador de la reseña a actualizar
+     * @param reviewDetails Información de la reseña actualizada
+     * @return ResponseEntity con la reseña actualizada o un mensaje de error
+     */
     @PutMapping("/{id}")
     public ResponseEntity<Review> updateReview(@PathVariable String id, @RequestBody Review reviewDetails) {
         return reviewRepository.findById(id)
@@ -53,7 +79,12 @@ public class ReviewController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    // DELETE /reviews/{id} - Eliminar una reseña (protegido)
+    /**
+     * Eliminar una reseña.
+     *
+     * @param id Identificador de la reseña a eliminar
+     * @return ResponseEntity con un mensaje de éxito o error
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteReview(@PathVariable String id) {
         return reviewRepository.findById(id)

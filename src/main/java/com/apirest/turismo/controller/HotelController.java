@@ -9,6 +9,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Controlador REST para gestionar los hoteles (\Hotel\).
+ * <p>
+ * Proporciona endpoints para crear, actualizar, listar y obtener detalles de hoteles.
+ * </p>
+ */
 @RestController
 @RequestMapping("/hoteles")
 public class HotelController {
@@ -16,13 +22,22 @@ public class HotelController {
     @Autowired
     private HotelRepository hotelRepository;
 
-    // GET /hoteles - Listar todos los hoteles
+    /**
+     * Listar todos los hoteles.
+     *
+     * @return Lista de todos los hoteles
+     */
     @GetMapping
     public List<Hotel> getAllHoteles() {
         return hotelRepository.findAll();
     }
 
-    // GET /hoteles/{id} - Obtener detalles de un hotel
+    /**
+     * Obtener detalles de un hotel por ID.
+     *
+     * @param id Identificador del hotel
+     * @return ResponseEntity con los detalles del hotel o un mensaje de error
+     */
     @GetMapping("/{id}")
     public ResponseEntity<Hotel> getHotelById(@PathVariable String id) {
         Optional<Hotel> hotel = hotelRepository.findById(id);
@@ -30,14 +45,25 @@ public class HotelController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    // POST /hoteles - Crear un nuevo hotel (protegido)
+    /**
+     * Crear un nuevo hotel.
+     *
+     * @param hotel Información del hotel a crear
+     * @return ResponseEntity con el hotel creado
+     */
     @PostMapping
     public ResponseEntity<Hotel> createHotel(@RequestBody Hotel hotel) {
         Hotel savedHotel = hotelRepository.save(hotel);
         return ResponseEntity.ok(savedHotel);
     }
 
-    // PUT /hoteles/{id} - Actualizar información de un hotel (protegido)
+    /**
+     * Actualizar información de un hotel existente.
+     *
+     * @param id Identificador del hotel a actualizar
+     * @param hotelDetails Detalles actualizados del hotel
+     * @return ResponseEntity con el hotel actualizado o un mensaje de error
+     */
     @PutMapping("/{id}")
     public ResponseEntity<Hotel> updateHotel(@PathVariable String id, @RequestBody Hotel hotelDetails) {
         return hotelRepository.findById(id)
